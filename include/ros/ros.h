@@ -1,8 +1,10 @@
 #ifndef ROS_H
 #define ROS_H
 
-#include <string>
+#include <functional>
 #include <memory>
+#include <string>
+
 #include <rclcpp/rclcpp.hpp>
 
 #define ROS_INFO(str, ...) printf(str "\n", __VA_ARGS__)
@@ -105,12 +107,16 @@ public:
   }
 
   template <class M>
-  Subscriber subscribe(const std::string& topic, uint32_t queue_size, void(*fp)(const std::shared_ptr<M const>))
+  Subscriber subscribe(const std::string& topic, uint32_t queue_size, void(*fp)(const std::shared_ptr<M const>&))
   {
     typename rclcpp::subscription::Subscription<M>::SharedPtr ros2_sub;
     rmw_qos_profile_t qos = rmw_qos_profile_default;
     qos.depth = queue_size;
-    ros2_sub = Shim::get_shim()->node->create_subscription<M>(topic, fp, rmw_qos_profile_default);
+    // We need this lambda to work around the fact that (one common variant
+    // of) ROS1 callbacks take 'const std::shared_ptr<M const>&' but ROS2
+    // callbacks take 'const std::shared_ptr<M const>&' (no & at the end).
+    auto shfp = [fp] (const std::shared_ptr<M const> msg) { fp(msg); };
+    ros2_sub = Shim::get_shim()->node->create_subscription<M>(topic, shfp, rmw_qos_profile_default);
     ROS2Subscriber<M> *sub_templated = new ROS2Subscriber<M>(ros2_sub);
     Subscriber ros1_sub;
     ros1_sub.sub = static_cast<ROS2SubscriberBase *>(sub_templated);
