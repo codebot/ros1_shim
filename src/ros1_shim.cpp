@@ -6,7 +6,6 @@ static ros::Shim g_shim;
 
 void ros::init(int &argc, char **argv, const std::string &node_name, uint32_t /*options*/)
 {
-  printf("hello i am ros::init()\n");
   rclcpp::init(argc, argv);
   g_shim.node_name = node_name;
   g_shim.node = rclcpp::node::Node::make_shared(node_name);

@@ -5,7 +5,7 @@
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
 
-#define ROS_INFO printf
+#define ROS_INFO(str, ...) printf(str "\n", __VA_ARGS__)
 
 namespace rclcpp
 {
@@ -99,16 +99,17 @@ public:
     typename rclcpp::publisher::Publisher<M>::SharedPtr pub;
     pub = Shim::get_shim()->node->create_publisher<M>(topic, (size_t)queue_size); // TODO: latching
     ROS2Publisher<M> *pub_templated = new ROS2Publisher<M>(pub);
-    //ROS2PublisherBase pub_base = static_cast<ROS2PublisherBase>(pub_templated);
     Publisher ros1_pub;
-    ros1_pub.pub = static_cast<ROS2PublisherBase *>(pub_templated); //std::make_shared<ROS2PublisherBase>(pub_base);
+    ros1_pub.pub = static_cast<ROS2PublisherBase *>(pub_templated);
     return ros1_pub;
   }
 
   template <class M>
-  Subscriber subscribe(const std::string& topic, uint32_t /*queue_size*/, void(&fp)(const std::shared_ptr<M const>))
+  Subscriber subscribe(const std::string& topic, uint32_t queue_size, void(*fp)(const std::shared_ptr<M const>))
   {
     typename rclcpp::subscription::Subscription<M>::SharedPtr ros2_sub;
+    rmw_qos_profile_t qos = rmw_qos_profile_default;
+    qos.depth = queue_size;
     ros2_sub = Shim::get_shim()->node->create_subscription<M>(topic, fp, rmw_qos_profile_default);
     ROS2Subscriber<M> *sub_templated = new ROS2Subscriber<M>(ros2_sub);
     Subscriber ros1_sub;
