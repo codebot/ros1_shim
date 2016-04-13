@@ -113,7 +113,7 @@ public:
     qos.depth = queue_size;
     // We need this lambda to work around the fact that (one common variant
     // of) ROS1 callbacks take 'const std::shared_ptr<M const>&' but ROS2
-    // callbacks take 'const std::shared_ptr<M const>&' (no & at the end).
+    // callbacks take 'const std::shared_ptr<M const>' (no & at the end).
     auto shfp = [fp] (const std::shared_ptr<M const> msg) { fp(msg); };
     ros2_sub = Shim::get_shim()->node->create_subscription<M>(topic, shfp, rmw_qos_profile_default);
     ROS2Subscriber<M> *sub_templated = new ROS2Subscriber<M>(ros2_sub);
