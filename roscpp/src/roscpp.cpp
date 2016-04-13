@@ -37,3 +37,16 @@ void ros::spin()
 {
   rclcpp::spin(g_shim.node);
 }
+
+/*
+bool ros::NodeHandle::ok()
+{
+  return rclcpp::ok();
+}
+*/
+ros::Time ros::Time::now()
+{
+  ros::Time t;
+  return t;
+}
+

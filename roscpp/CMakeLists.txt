@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 
-project(ros1_shim)
+project(roscpp)
 
 if(NOT WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra")
@@ -18,31 +18,31 @@ macro(targets)
     get_rclcpp_information("${rmw_implementation}" "rclcpp${target_suffix}")
   endif()
 
-  add_library(ros1_shim${target_suffix}
-    src/ros1_shim.cpp)
-  ament_target_dependencies(ros1_shim${target_suffix}
+  add_library(roscpp${target_suffix} SHARED
+    src/roscpp.cpp)
+  ament_target_dependencies(roscpp${target_suffix}
     "rclcpp${target_suffix}")
 
   add_executable(ros1_talker${target_suffix} ros1_tutorials/talker.cpp)
   ament_target_dependencies(ros1_talker${target_suffix}
     "rclcpp${target_suffix}"
     "std_msgs")
-  target_link_libraries(ros1_talker${target_suffix} ros1_shim${target_suffix})
+  target_link_libraries(ros1_talker${target_suffix} roscpp${target_suffix})
 
   add_executable(ros1_listener${target_suffix} ros1_tutorials/listener.cpp)
   ament_target_dependencies(ros1_listener${target_suffix}
     "rclcpp${target_suffix}"
     "std_msgs")
-  target_link_libraries(ros1_listener${target_suffix} ros1_shim${target_suffix})
+  target_link_libraries(ros1_listener${target_suffix} roscpp${target_suffix})
 
   install(TARGETS
-    ros1_shim${target_suffix}
+    roscpp${target_suffix}
     ros1_talker${target_suffix}
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin)
 
-  ament_export_libraries(ros1_shim${target_suffix})
+  ament_export_libraries(roscpp${target_suffix})
 endmacro()
 
 install(

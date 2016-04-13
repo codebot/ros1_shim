@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ros1_shim</name>
+  <name>roscpp</name>
   <version>0.0.0</version>
   <description>
     The goal is to be able to compile (some/most/all) ROS1 code in ROS2.
