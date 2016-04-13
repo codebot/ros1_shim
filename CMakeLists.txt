@@ -38,10 +38,23 @@ macro(targets)
   install(TARGETS
     ros1_shim${target_suffix}
     ros1_talker${target_suffix}
-    DESTINATION bin)
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin)
+
+  ament_export_libraries(ros1_shim${target_suffix})
 endmacro()
 
+install(
+  DIRECTORY include/
+  DESTINATION include
+)
+
 call_for_each_rmw_implementation(targets GENERATE_DEFAULT)
+
+ament_export_dependencies(rclcpp)
+ament_export_dependencies(std_msgs)
+ament_export_include_directories(include)
 
 if(AMENT_ENABLE_TESTING)
   find_package(ament_lint_auto REQUIRED)
