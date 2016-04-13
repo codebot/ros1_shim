@@ -1,7 +1,6 @@
 #ifndef ROS_H
 #define ROS_H
 
-#include <functional>
 #include <memory>
 #include <string>
 
