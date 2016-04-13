@@ -6,7 +6,9 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-#define ROS_INFO(str, ...) printf(str "\n", __VA_ARGS__)
+#define ROS_INFO(str, ...) printf(str "\n", ## __VA_ARGS__)
+#define ROS_WARN(str, ...) printf(str "\n", ## __VA_ARGS__)
+#define ROS_ERROR(str, ...) printf(str "\n", ## __VA_ARGS__)
 
 namespace rclcpp
 {
@@ -94,6 +96,19 @@ public:
 class NodeHandle
 {
 public:
+  std::string prefix;
+
+  NodeHandle(const std::string &_prefix) : prefix(_prefix) { }
+  NodeHandle() : prefix() { }
+
+  bool ok() { return ros::ok(); }
+
+  template <class T>
+  void param(const std::string &name __attribute__((unused)), T &param, T default_value)
+  {
+    param = default_value;
+  }
+
   template <class M>
   Publisher advertise(const std::string& topic, uint32_t queue_size, bool latch __attribute__((unused)) = false )
   {
@@ -132,6 +147,12 @@ public:
   bool sleep();
 };
 
+class Time
+{
+public:
+  static Time now();
+  double toSec();
+};
 
 }
 
