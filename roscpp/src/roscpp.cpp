@@ -50,3 +50,8 @@ ros::Time ros::Time::now()
   return t;
 }
 
+double ros::Time::toSec()
+{
+  return 0.0;
+}
+
