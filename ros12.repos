@@ -79,6 +79,10 @@ repositories:
     type: git
     url: https://github.com/ros-infrastructure/catkin_pkg
     version: ros1_shim
+  ros/cmake_modules:
+    type: git
+    url: https://github.com/ros/cmake_modules.git
+    version: 0.4-devel
   ros/geometry2:
     type: git
     url: https://github.com/ros/geometry2.git
