@@ -5,10 +5,13 @@
 #include <string>
 
 #include <rclcpp/rclcpp.hpp>
+#include "ros/time.h"
 
 #define ROS_INFO(str, ...) printf(str "\n", ## __VA_ARGS__)
+#define ROS_DEBUG(str, ...) printf(str "\n", ## __VA_ARGS__)
 #define ROS_WARN(str, ...) printf(str "\n", ## __VA_ARGS__)
 #define ROS_ERROR(str, ...) printf(str "\n", ## __VA_ARGS__)
+#define ROS_FATAL(str, ...) printf(str "\n", ## __VA_ARGS__)
 
 namespace rclcpp
 {
@@ -52,6 +55,8 @@ class Publisher // coming from ros1
 {
 public:
   ROS2PublisherBase *pub;
+  std::string topic_;
+
   //std::shared_ptr<ROS2PublisherBase> pub;
   Publisher() : pub(NULL) { }
 
@@ -65,6 +70,10 @@ public:
     //std::shared_ptr<ROS2Publisher<M>> step1 = static_cast<std::shared_ptr<ROS2Publisher<M>>>(pub);
     //ros2pub = static_cast<std::shared_ptr<ROS2Publisher<M>>>(pub)->pub;
   }
+
+  std::string getTopic() const { return topic_; }
+
+  uint32_t getNumSubscribers() const { return 42; } // TODO: not always true
 
 #if 0
   template <typename M>
@@ -109,6 +118,11 @@ public:
     param = default_value;
   }
 
+  template <class T>
+  void getParamCached(const std::string &name __attribute((unused)), T &param __attribute__((unused)))
+  {
+  }
+
   template <class M>
   Publisher advertise(const std::string& topic, uint32_t queue_size, bool latch __attribute__((unused)) = false )
   {
@@ -117,6 +131,7 @@ public:
     ROS2Publisher<M> *pub_templated = new ROS2Publisher<M>(pub);
     Publisher ros1_pub;
     ros1_pub.pub = static_cast<ROS2PublisherBase *>(pub_templated);
+    ros1_pub.topic_ = topic;
     return ros1_pub;
   }
 
@@ -147,12 +162,14 @@ public:
   bool sleep();
 };
 
+/*
 class Time
 {
 public:
   static Time now();
   double toSec();
 };
+*/
 
 }
 

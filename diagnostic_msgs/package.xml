@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>diagnostic_msgs</name>
+  <version>0.0.0</version>
+  <description>
+    Shim package to compensate for the addition of the 's' in the name of the 
+    ROS2 diagnostics_msgs package.
+  </description>
+  <maintainer email="mquigley@osrfoundation.org">Morgan Quigley</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <build_depend>diagnostics_msgs</build_depend>
+  <exec_depend>diagnostics_msgs</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+

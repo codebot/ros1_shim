@@ -35,6 +35,22 @@ repositories:
     type: git
     url: https://github.com/ament/uncrustify.git
     version: master
+  codebot/ros:
+    type: git
+    url: https://github.com/codebot/ros
+    version: kinetic-devel
+  codebot/roscpp_core:
+    type: git
+    url: https://github.com/codebot/roscpp_core
+    version: kinetic-devel
+  codebot/ros_comm:
+    type: git
+    url: https://github.com/codebot/ros_comm
+    version: kinetic-devel
+  codebot/diagnostics:
+    type: git
+    url: https://github.com/codebot/diagnostics
+    version: indigo-devel
   codebot/joystick_drivers:
     type: git
     url: https://github.com/codebot/joystick_drivers.git

@@ -1,11 +1,14 @@
 #include "ros/ros.h"
+#include "ros/this_node.h"
 #include <cstdio>
 #include "rclcpp/rclcpp.hpp"
+#include "ros/time.h"
 
 static ros::Shim g_shim;
 
 void ros::init(int &argc, char **argv, const std::string &node_name, uint32_t /*options*/)
 {
+  ros::Time::init();
   rclcpp::init(argc, argv);
   g_shim.node_name = node_name;
   g_shim.node = rclcpp::node::Node::make_shared(node_name);
@@ -44,14 +47,9 @@ bool ros::NodeHandle::ok()
   return rclcpp::ok();
 }
 */
-ros::Time ros::Time::now()
-{
-  ros::Time t;
-  return t;
-}
 
-double ros::Time::toSec()
+const std::string &ros::this_node::getName()
 {
-  return 0.0;
+  return g_shim.node_name;
 }
 

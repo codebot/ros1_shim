@@ -10,6 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rmw_implementation_cmake REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(rostime REQUIRED)
 
 include_directories(include)
 
@@ -21,7 +22,8 @@ macro(targets)
   add_library(roscpp${target_suffix} SHARED
     src/roscpp.cpp)
   ament_target_dependencies(roscpp${target_suffix}
-    "rclcpp${target_suffix}")
+    "rclcpp${target_suffix}"
+    "rostime")
 
   add_executable(ros1_talker${target_suffix} ros1_tutorials/talker.cpp)
   ament_target_dependencies(ros1_talker${target_suffix}
@@ -54,6 +56,7 @@ call_for_each_rmw_implementation(targets GENERATE_DEFAULT)
 
 ament_export_dependencies(rclcpp)
 ament_export_dependencies(std_msgs)
+ament_export_dependencies(rostime)
 ament_export_include_directories(include)
 
 if(AMENT_ENABLE_TESTING)
