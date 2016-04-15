@@ -51,6 +51,38 @@ repositories:
     type: git
     url: https://github.com/eProsima/ROS-RMW-Fast-RTPS-cpp.git
     version: master
+  kobuki/ecl_core:
+    type: git
+    url: https://github.com/gerkey/ecl_core.git
+    version: osx_fixes
+  kobuki/ecl_lite:
+    type: git
+    url: https://github.com/gerkey/ecl_lite.git
+    version: osx_fixes
+  kobuki/ecl_navigation:
+    type: git
+    url: https://github.com/stonier/ecl_navigation.git
+    version: indigo-devel
+  kobuki/ecl_tools:
+    type: git
+    url: https://github.com/stonier/ecl_tools.git
+    version: indigo-devel
+  kobuki/kobuki:
+    type: git
+    url: git@github.com:gerkey/kobuki.git
+    version: indigo
+  kobuki/kobuki_core:
+    type: git
+    url: https://github.com/yujinrobot/kobuki_core.git
+    version: indigo
+  kobuki/kobuki_msgs:
+    type: git
+    url: git@github.com:gerkey/kobuki_msgs.git
+    version: indigo
+  kobuki/sophus:
+    type: git
+    url: https://github.com/stonier/sophus.git
+    version: indigo
   ros/catkin:
     type: git
     url: https://github.com/ros/catkin.git
@@ -70,7 +102,7 @@ repositories:
   ros2/common_interfaces:
     type: git
     url: https://github.com/ros2/common_interfaces.git
-    version: master
+    version: ros1_shim
   ros2/demos:
     type: git
     url: https://github.com/ros2/demos.git
@@ -130,7 +162,7 @@ repositories:
   ros2/rosidl:
     type: git
     url: https://github.com/ros2/rosidl.git
-    version: master
+    version: ros1_shim
   ros2/rosidl_dds:
     type: git
     url: https://github.com/ros2/rosidl_dds.git
@@ -147,31 +179,3 @@ repositories:
     type: git
     url: https://github.com/ros/console_bridge.git
     version: master
-  kobuki/ecl_lite:
-    type: git
-    url: https://github.com/gerkey/ecl_lite.git
-    version: osx_fixes
-  kobuki/ecl_core:
-    type: git
-    url: https://github.com/gerkey/ecl_core.git
-    version: osx_fixes
-  kobuki/ecl_navigation:
-    type: git
-    url: https://github.com/stonier/ecl_navigation.git
-    version: indigo-devel
-  kobuki/ecl_tools:
-    type: git
-    url: https://github.com/stonier/ecl_tools.git
-    version: indigo-devel
-  kobuki/sophus:
-    type: git
-    url: https://github.com/stonier/sophus.git
-    version: indigo
-  kobuki/kobuki_core:
-    type: git
-    url: https://github.com/yujinrobot/kobuki_core.git
-    version: indigo
-  kobuki/kobuki:
-    type: git
-    url: https://github.com/yujinrobot/kobuki.git
-    version: indigo
