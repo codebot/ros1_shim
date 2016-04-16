@@ -20,4 +20,3 @@ install(
   DIRECTORY cmake
   DESTINATION share/${PROJECT_NAME}
 )
-
