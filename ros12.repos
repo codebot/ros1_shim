@@ -86,7 +86,7 @@ repositories:
   ros/geometry:
     type: git
     url: https://github.com/ros/geometry.git
-    version: indigo-devel
+    version: ros1_shim
   ros/geometry2:
     type: git
     url: https://github.com/ros/geometry2.git
