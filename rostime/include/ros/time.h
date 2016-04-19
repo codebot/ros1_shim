@@ -178,12 +178,32 @@ namespace ros
       : TimeBase<Time, Duration>(_sec, _nsec)
     {}
 
-    operator builtin_interfaces::msg::Time()
+    operator builtin_interfaces::msg::Time() const
     {
       builtin_interfaces::msg::Time t;
       t.sec = this->sec;
       t.nanosec = this->nsec;
       return t;
+    }
+
+    Time(const builtin_interfaces::msg::Time& rhs)
+    {
+      this->sec = rhs.sec;
+      this->nsec = rhs.nanosec;
+    }
+
+    operator std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds>&() const
+    {
+      auto d = std::chrono::seconds(this->sec) + std::chrono::nanoseconds(this->nsec);
+      std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> t(
+        std::chrono::duration_cast<std::chrono::system_clock::duration>(d));
+      return t;
+    }
+
+    Time(std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> rhs)
+    {
+      this->sec = std::chrono::time_point_cast<std::chrono::seconds>(rhs).time_since_epoch().count();
+      this->nsec = std::chrono::time_point_cast<std::chrono::nanoseconds>(rhs).time_since_epoch().count();
     }
 
     explicit Time(double t) { fromSec(t); }

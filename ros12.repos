@@ -90,7 +90,7 @@ repositories:
   ros/geometry2:
     type: git
     url: https://github.com/ros/geometry2.git
-    version: ros2_alpha
+    version: ros1_shim
   orocos/orocos_kinetmatics_dynamics:
     type: git
     url: https://github.com/orocos/orocos_kinematics_dynamics

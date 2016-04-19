@@ -10,7 +10,7 @@ if(AMENT_ENABLE_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_export_dependencies(ament_cmake rosidl_default_generators)
+ament_export_dependencies(ament_cmake)
 
 ament_package(
   CONFIG_EXTRAS "message_generation-extras.cmake"

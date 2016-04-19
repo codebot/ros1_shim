@@ -8,6 +8,7 @@ catkin_package(
   LIBRARIES ${PROJECT_NAME}
   CATKIN_DEPENDS cpp_common
   DEPENDS Boost
+  CFG_EXTRAS "rostime.cmake"
 )
 add_definitions(-std=c++11)
 
@@ -31,6 +32,10 @@ install(TARGETS rostime
 install(DIRECTORY include/
   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h")
+
+install(DIRECTORY cmake/
+  DESTINATION share/${PROJECT_NAME}
+)
 
 if(CATKIN_ENABLE_TESTING)
   catkin_add_gtest(${PROJECT_NAME}-test_duration test/duration.cpp)
