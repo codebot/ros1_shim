@@ -57,6 +57,7 @@
 #include "duration.h"
 #include <boost/math/special_functions/round.hpp>
 #include "rostime_decl.h"
+#include "builtin_interfaces/msg/time.hpp"
 
 /*********************************************************************
  ** Cross Platform Headers
@@ -176,6 +177,14 @@ namespace ros
     Time(uint32_t _sec, uint32_t _nsec)
       : TimeBase<Time, Duration>(_sec, _nsec)
     {}
+
+    operator builtin_interfaces::msg::Time()
+    {
+      builtin_interfaces::msg::Time t;
+      t.sec = this->sec;
+      t.nanosec = this->nsec;
+      return t;
+    }
 
     explicit Time(double t) { fromSec(t); }
 

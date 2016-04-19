@@ -9,6 +9,7 @@ catkin_package(
   CATKIN_DEPENDS cpp_common
   DEPENDS Boost
 )
+add_definitions(-std=c++11)
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
