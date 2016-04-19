@@ -71,6 +71,10 @@ repositories:
     type: git
     url: https://github.com/eProsima/ROS-RMW-Fast-RTPS-cpp.git
     version: master
+  ros/angles:
+    type: git
+    url: https://github.com/ros/angles.git
+    version: master
   ros/catkin:
     type: git
     url: https://github.com/ros/catkin.git
@@ -83,6 +87,10 @@ repositories:
     type: git
     url: https://github.com/ros/cmake_modules.git
     version: 0.4-devel
+  ros/geometry:
+    type: git
+    url: https://github.com/ros/geometry.git
+    version: indigo-devel
   ros/geometry2:
     type: git
     url: https://github.com/ros/geometry2.git

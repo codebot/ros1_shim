@@ -51,6 +51,10 @@ install(
   DIRECTORY include/
   DESTINATION include
 )
+install(
+  DIRECTORY cmake
+  DESTINATION share/${PROJECT_NAME}
+)
 
 call_for_each_rmw_implementation(targets GENERATE_DEFAULT)
 
@@ -64,5 +68,7 @@ if(AMENT_ENABLE_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_package()
+ament_package(
+  CONFIG_EXTRAS "roscpp-extras.cmake"
+)
 
