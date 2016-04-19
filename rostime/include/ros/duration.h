@@ -46,6 +46,7 @@
   #pragma warning(disable: 4661)
 #endif
 
+#include <chrono>
 #include <iostream>
 #include <math.h>
 #include <stdexcept>
@@ -115,6 +116,19 @@ public:
   Duration(int32_t _sec, int32_t _nsec)
   : DurationBase<Duration>(_sec, _nsec)
   {}
+
+  operator std::chrono::duration<double, std::nano>() const
+  {
+    std::chrono::duration<double, std::nano> t;
+    t = std::chrono::seconds(this->sec) + std::chrono::nanoseconds(this->nsec);
+    return t;
+  }
+
+  Duration(const std::chrono::duration<double, std::nano>& rhs)
+  {
+    this->sec = std::chrono::duration_cast<std::chrono::seconds>(rhs).count();
+    this->nsec = std::chrono::duration_cast<std::chrono::nanoseconds>(rhs).count();
+  }
 
   explicit Duration(double t) { fromSec(t); }
   explicit Duration(const Rate&);

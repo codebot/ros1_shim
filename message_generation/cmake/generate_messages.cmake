@@ -1,3 +1,4 @@
+find_package(rosidl_cmake REQUIRED)
 macro(generate_messages)
   cmake_parse_arguments(ARG "" "" "DEPENDENCIES;LANGS" ${ARGN})
 
@@ -12,3 +13,7 @@ macro(generate_messages)
     )
   endif()
 endmacro()
+include_directories(
+  ${CMAKE_CURRENT_BINARY_DIR}/rosidl_generator_cpp/${PROJECT_NAME}/msg/shim
+  ${CMAKE_CURRENT_BINARY_DIR}/rosidl_generator_cpp/
+)
