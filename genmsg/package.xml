@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>genmsg</name>
+  <version>0.0.0</version>
+  <description>
+    This is just a placeholder; in the ros1_shim universe, actual message
+    generation is handled by ros2.
+  </description>
+  <maintainer email="mquigley@osrfoundation.org">Morgan Quigley</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+

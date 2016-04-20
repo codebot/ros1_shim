@@ -47,6 +47,10 @@ repositories:
     type: git
     url: https://github.com/codebot/ros
     version: kinetic-devel
+  codebot/rospack:
+    type: git
+    url: https://github.com/codebot/rospack
+    version: jade-devel
   codebot/ros1_shim:
     type: git
     url: https://github.com/codebot/ros1_shim.git

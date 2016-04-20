@@ -123,6 +123,11 @@ public:
   {
   }
 
+  template <class T>
+  void getParam(const std::string &name __attribute((unused)), T &param __attribute__((unused)))
+  {
+  }
+ 
   template <class M>
   Publisher advertise(const std::string& topic, uint32_t queue_size, bool latch __attribute__((unused)) = false )
   {

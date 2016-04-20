@@ -192,6 +192,7 @@ namespace ros
       this->nsec = rhs.nanosec;
     }
 
+/*
     operator std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds>&() const
     {
       auto d = std::chrono::seconds(this->sec) + std::chrono::nanoseconds(this->nsec);
@@ -199,6 +200,7 @@ namespace ros
         std::chrono::duration_cast<std::chrono::system_clock::duration>(d));
       return t;
     }
+*/
 
     Time(std::chrono::time_point<std::chrono::system_clock, std::chrono::nanoseconds> rhs)
     {
