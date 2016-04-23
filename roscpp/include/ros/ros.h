@@ -102,6 +102,11 @@ public:
   Subscriber() : sub(NULL) { }
 };
 
+class ServiceServer
+{
+public:
+};
+
 class NodeHandle
 {
 public:
@@ -155,6 +160,12 @@ public:
     Subscriber ros1_sub;
     ros1_sub.sub = static_cast<ROS2SubscriberBase *>(sub_templated);
     return ros1_sub;
+  }
+
+  template <class M1, class M2>
+  ServiceServer advertiseService(const std::string &topic, bool (*fp)(const std::shared_ptr<M1 const>&, const std::shared_ptr<M2>&))
+  {
+    return ServiceServer();
   }
 };
 
