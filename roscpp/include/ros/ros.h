@@ -107,6 +107,16 @@ class ServiceServer
 public:
 };
 
+class ServiceClient
+{
+public:
+  template <class Service>
+  bool call(Service &service)
+  {
+    return true;
+  }
+};
+
 class NodeHandle
 {
 public:
@@ -162,11 +172,18 @@ public:
     return ros1_sub;
   }
 
-  template <class M1, class M2>
-  ServiceServer advertiseService(const std::string &topic, bool (*fp)(const std::shared_ptr<M1 const>&, const std::shared_ptr<M2>&))
+  template <class MReq, class MRes>
+  ServiceServer advertiseService(const std::string &service_name, bool (*fp)(MReq &, MRes &))
   {
     return ServiceServer();
   }
+
+  template <class Service>
+  ServiceClient serviceClient(const std::string &service_name)
+  {
+    return ServiceClient();
+  }
+
 };
 
 class Rate

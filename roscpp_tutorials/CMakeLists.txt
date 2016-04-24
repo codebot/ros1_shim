@@ -25,7 +25,7 @@ foreach(dir
     #notify_connect
     talker
     #babbler
-    #add_two_ints_client
+    add_two_ints_client
     add_two_ints_server
     #add_two_ints_server_class
     #anonymous_listener
