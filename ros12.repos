@@ -91,6 +91,10 @@ repositories:
     type: git
     url: https://github.com/ros/cmake_modules.git
     version: 0.4-devel
+  ros/freenect_stack:
+    type: git
+    url: git@github.com:ros-drivers/freenect_stack.git
+    version: master
   ros/geometry:
     type: git
     url: https://github.com/ros/geometry.git
