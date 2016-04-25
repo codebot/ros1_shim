@@ -175,6 +175,15 @@ public:
   template <class MReq, class MRes>
   ServiceServer advertiseService(const std::string &service_name, bool (*fp)(MReq &, MRes &))
   {
+    auto fp_wrapper =
+        [fp] 
+        (const std::shared_ptr<rmw_request_id_t> request_header, 
+         const std::shared_ptr<MReq> request, std::shared_ptr<MRes> response) 
+        {
+          //fp(std::make_shared(request), std::make_shared(response)); 
+        };
+    Shim::get_shim()->node->create_service<typename MReq::_service>
+        (service_name, fp_wrapper);
     return ServiceServer();
   }
 
