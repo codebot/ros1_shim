@@ -11,9 +11,11 @@
 - git:
     local-name: ament/ament_package
     uri: https://github.com/ament/ament_package.git
+    version: ros1_shim
 - git:
     local-name: ament/ament_tools
     uri: https://github.com/ament/ament_tools.git
+    version: ros1_shim
 - git:
     local-name: ament/gmock_vendor
     uri: https://github.com/ament/gmock_vendor.git
@@ -45,18 +47,22 @@
 - git:
     local-name: codebot/diagnostics
     uri: https://github.com/codebot/diagnostics
+    version: indigo-devel
 - git:
     local-name: codebot/joystick_drivers
     uri: https://github.com/codebot/joystick_drivers.git
+    version: indigo-devel
 - git:
     local-name: codebot/ros
     uri: https://github.com/codebot/ros
+    version: kinetic-devel
 - git:
     local-name: codebot/ros1_shim
     uri: https://github.com/codebot/ros1_shim.git
 - git:
     local-name: codebot/ros_comm
     uri: https://github.com/codebot/ros_comm
+    version: kinetic-devel
 - git:
     local-name: codebot/roscpp_core
     uri: https://github.com/codebot/roscpp_core
@@ -65,8 +71,8 @@
     uri: https://github.com/codebot/rospack
 - git:
     local-name: dynamic_reconfigure
-    uri: https://github.com/ros-gbp/dynamic_reconfigure-release.git
-    version: release/indigo/dynamic_reconfigure/1.5.43-0
+    uri: https://github.com/ros/dynamic_reconfigure
+    version: master
 - git:
     local-name: eProsima/Fast-CDR
     uri: https://github.com/eProsima/Fast-CDR.git
@@ -91,36 +97,44 @@
 - git:
     local-name: orocos/orocos_kinetmatics_dynamics
     uri: https://github.com/orocos/orocos_kinematics_dynamics
+    version: release-1.3
 - git:
     local-name: ros/angles
     uri: https://github.com/ros/angles.git
 - git:
     local-name: ros/catkin
     uri: https://github.com/ros/catkin.git
+    version: ros1_shim
 - git:
     local-name: ros/catkin_pkg
     uri: https://github.com/ros-infrastructure/catkin_pkg
+    version: ros1_shim
 - git:
     local-name: ros/cmake_modules
     uri: https://github.com/ros/cmake_modules.git
+    version: 0.4-devel
 - git:
     local-name: ros/freenect_stack
     uri: git@github.com:ros-drivers/freenect_stack.git
 - git:
     local-name: ros/geometry
     uri: https://github.com/ros/geometry.git
+    version: ros1_shim
 - git:
     local-name: ros/geometry2
     uri: https://github.com/ros/geometry2.git
+    version: ros1_shim
 - git:
     local-name: ros2/common_interfaces
     uri: https://github.com/ros2/common_interfaces.git
+    version: ros1_shim
 - git:
     local-name: ros2/demos
     uri: https://github.com/ros2/demos.git
 - git:
     local-name: ros2/examples
     uri: https://github.com/ros2/examples.git
+    version: ros1_shim
 - git:
     local-name: ros2/launch
     uri: https://github.com/ros2/launch.git
@@ -160,6 +174,7 @@
 - git:
     local-name: ros2/rosidl
     uri: https://github.com/ros2/rosidl.git
+    version: ros1_shim
 - git:
     local-name: ros2/rosidl_dds
     uri: https://github.com/ros2/rosidl_dds.git
@@ -178,6 +193,10 @@
     uri: https://github.com/ros-gbp/ros_comm-release.git
     version: release/indigo/rosbag_storage/1.11.19-0
 - git:
+    local-name: ros_comm/roslz4
+    uri: https://github.com/ros-gbp/ros_comm-release.git
+    version: release/indigo/roslz4/1.11.19-0
+- git:
     local-name: ros_comm/rosout
     uri: https://github.com/ros-gbp/ros_comm-release.git
     version: release/indigo/rosout/1.11.19-0
@@ -192,7 +211,3 @@
 - git:
     local-name: vendor/console_bridge
     uri: https://github.com/ros/console_bridge.git
-- git:
-    local-name: ros_comm/roslz4
-    uri: https://github.com/ros-gbp/ros_comm-release.git
-    version: release/indigo/roslz4/1.11.19-0
