@@ -6,12 +6,15 @@
 
 #include <rclcpp/rclcpp.hpp>
 #include "ros/time.h"
+#include "wall_timer.h"
 
+/*
 #define ROS_INFO(str, ...) printf(str "\n", ## __VA_ARGS__)
 #define ROS_DEBUG(str, ...) printf(str "\n", ## __VA_ARGS__)
 #define ROS_WARN(str, ...) printf(str "\n", ## __VA_ARGS__)
 #define ROS_ERROR(str, ...) printf(str "\n", ## __VA_ARGS__)
 #define ROS_FATAL(str, ...) printf(str "\n", ## __VA_ARGS__)
+*/
 
 namespace rclcpp
 {
@@ -75,6 +78,8 @@ public:
 
   uint32_t getNumSubscribers() const { return 42; } // TODO: not always true
 
+  void shutdown() { } // todo: something
+
 #if 0
   template <typename M>
   void publish(const boost::shared_ptr<M>& message) const;
@@ -100,6 +105,7 @@ class Subscriber
 public:
   ROS2SubscriberBase *sub;
   Subscriber() : sub(NULL) { }
+  void shutdown() { } // todo: something
 };
 
 class ServiceServer
