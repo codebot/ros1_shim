@@ -1,3 +1,4 @@
+find_package(rosidl_generator_cpp REQUIRED)
 macro(_srv_prepend_path ARG_PATH ARG_FILES ARG_OUTPUT_VAR)
   cmake_parse_arguments(ARG "UNIQUE" "" "" ${ARGN})
   if(ARG_UNPARSED_ARGUMENTS)

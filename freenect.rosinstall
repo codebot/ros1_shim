@@ -29,17 +29,9 @@
     local-name: ament/uncrustify
     uri: https://github.com/ament/uncrustify.git
 - git:
-    local-name: bond_core/bond
-    uri: https://github.com/ros-gbp/bond_core-release.git
-    version: release/indigo/bond/1.7.16-0
-- git:
-    local-name: bond_core/bondcpp
-    uri: https://github.com/ros-gbp/bond_core-release.git
-    version: release/indigo/bondcpp/1.7.16-0
-- git:
-    local-name: bond_core/smclib
-    uri: https://github.com/ros-gbp/bond_core-release.git
-    version: release/indigo/smclib/1.7.16-0
+    local-name: bond_core
+    uri: https://github.com/ros/bond_core
+    version: master
 - git:
     local-name: class_loader
     uri: https://github.com/ros-gbp/class_loader-release.git
@@ -66,6 +58,7 @@
 - git:
     local-name: codebot/roscpp_core
     uri: https://github.com/codebot/roscpp_core
+    version: kinetic-devel
 - git:
     local-name: codebot/rospack
     uri: https://github.com/codebot/rospack

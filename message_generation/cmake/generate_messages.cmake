@@ -1,4 +1,5 @@
 find_package(rosidl_cmake REQUIRED)
+find_package(rosidl_generator_cpp REQUIRED)
 macro(generate_messages)
   cmake_parse_arguments(ARG "" "" "DEPENDENCIES;LANGS" ${ARGN})
   message("HELLO I AM GENERATING YOUR MESSAGES: ${${PROJECT_NAME}_MESSAGE_FILES}")
