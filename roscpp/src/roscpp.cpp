@@ -3,6 +3,7 @@
 #include <cstdio>
 #include "rclcpp/rclcpp.hpp"
 #include "ros/time.h"
+#include <boost/io/ios_state.hpp>
 
 static ros::Shim g_shim;
 
@@ -53,3 +54,9 @@ const std::string &ros::this_node::getName()
   return g_shim.node_name;
 }
 
+std::ostream &operator<<(std::ostream &os,
+    const builtin_interfaces::msg::Time &rhs)
+{
+  os << rhs.sec << "." << std::setw(9) << std::setfill('0') << rhs.nanosec;
+  return os;
+}

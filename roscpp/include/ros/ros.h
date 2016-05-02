@@ -185,7 +185,8 @@ public:
   {
     typename rclcpp::subscription::Subscription<M>::SharedPtr ros2_sub;
     rmw_qos_profile_t qos = rmw_qos_profile_default;
-    qos.depth = queue_size;
+    if (qos.depth)
+      qos.depth = queue_size;
     // We need this lambda to work around the fact that (one common variant
     // of) ROS1 callbacks take 'const std::shared_ptr<M const>&' but ROS2
     // callbacks take 'const std::shared_ptr<M const>' (no & at the end).
@@ -195,17 +196,23 @@ public:
     Subscriber ros1_sub;
     ros1_sub.sub = static_cast<ROS2SubscriberBase *>(sub_templated);
     return ros1_sub;
-
-    //return Subscriber();
-    /*
-    SubscribeOptions ops;
-    ops.template init<M>(topic, queue_size, callback);
-    ops.tracked_object = tracked_object;
-    ops.transport_hints = transport_hints;
-    return subscribe(ops);
-    */
   }
 
+  template<class M, class T>
+  Subscriber subscribe(const std::string& topic, uint32_t queue_size,
+      void (T::*fp)(const std::shared_ptr<M const>&), T *obj)
+  {
+    typename rclcpp::subscription::Subscription<M>::SharedPtr ros2_sub;
+    rmw_qos_profile_t qos = rmw_qos_profile_default;
+    if (queue_size)
+      qos.depth = queue_size;
+    auto shfp = [obj, fp] (const std::shared_ptr<M const> msg) { obj->fp(msg); };
+    ros2_sub = Shim::get_shim()->node->create_subscription<M>(topic, shfp, rmw_qos_profile_default);
+    ROS2Subscriber<M> *sub_templated = new ROS2Subscriber<M>(ros2_sub);
+    Subscriber ros1_sub;
+    ros1_sub.sub = static_cast<ROS2SubscriberBase *>(sub_templated);
+    return ros1_sub;
+  }
 
   template <class MReq, class MRes>
   ServiceServer advertiseService(const std::string &service_name, bool (*fp)(MReq &, MRes &))
@@ -277,6 +284,13 @@ public:
 };
 */
 
+
 }
+
+// TODO: find a better home for this
+#include <builtin_interfaces/Time.h>
+#include <iostream>
+std::ostream& operator<<(std::ostream& os,
+    const builtin_interfaces::msg::Time& rhs);
 
 #endif

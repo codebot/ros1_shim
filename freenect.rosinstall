@@ -190,10 +190,6 @@
     uri: https://github.com/ros-gbp/ros_comm-release.git
     version: release/indigo/roslz4/1.11.19-0
 - git:
-    local-name: ros_comm/rosout
-    uri: https://github.com/ros-gbp/ros_comm-release.git
-    version: release/indigo/rosout/1.11.19-0
-- git:
     local-name: ros_comm/rosparam
     uri: https://github.com/ros-gbp/ros_comm-release.git
     version: release/indigo/rosparam/1.11.19-0
