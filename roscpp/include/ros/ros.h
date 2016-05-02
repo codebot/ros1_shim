@@ -7,6 +7,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include "ros/time.h"
 #include "wall_timer.h"
+#include <boost/bind.hpp>
 
 /*
 #define ROS_INFO(str, ...) printf(str "\n", ## __VA_ARGS__)
@@ -178,6 +179,34 @@ public:
     return ros1_sub;
   }
 
+  template<class M>
+  Subscriber subscribe(const std::string& topic, uint32_t queue_size, const boost::function<void (const std::shared_ptr<M const>&)>& callback,
+                             const VoidConstPtr& tracked_object = VoidConstPtr())
+  {
+    typename rclcpp::subscription::Subscription<M>::SharedPtr ros2_sub;
+    rmw_qos_profile_t qos = rmw_qos_profile_default;
+    qos.depth = queue_size;
+    // We need this lambda to work around the fact that (one common variant
+    // of) ROS1 callbacks take 'const std::shared_ptr<M const>&' but ROS2
+    // callbacks take 'const std::shared_ptr<M const>' (no & at the end).
+    auto shfp = [callback] (const std::shared_ptr<M const> msg) { callback(msg); };
+    ros2_sub = Shim::get_shim()->node->create_subscription<M>(topic, shfp, rmw_qos_profile_default);
+    ROS2Subscriber<M> *sub_templated = new ROS2Subscriber<M>(ros2_sub);
+    Subscriber ros1_sub;
+    ros1_sub.sub = static_cast<ROS2SubscriberBase *>(sub_templated);
+    return ros1_sub;
+
+    //return Subscriber();
+    /*
+    SubscribeOptions ops;
+    ops.template init<M>(topic, queue_size, callback);
+    ops.tracked_object = tracked_object;
+    ops.transport_hints = transport_hints;
+    return subscribe(ops);
+    */
+  }
+
+
   template <class MReq, class MRes>
   ServiceServer advertiseService(const std::string &service_name, bool (*fp)(MReq &, MRes &))
   {
@@ -199,6 +228,35 @@ public:
     return ServiceClient();
   }
 
+  template<class T>
+  WallTimer createWallTimer(
+      WallDuration period, void(T::*callback)(const WallTimerEvent&), T* obj,
+      bool oneshot = false, bool autostart = true) const
+  {
+    return createWallTimer(period, boost::bind(callback, obj, _1), oneshot, autostart);
+  }
+
+  template<class T>
+  WallTimer createWallTimer(
+      WallDuration period, void(T::*callback)(const WallTimerEvent&),
+      const boost::shared_ptr<T>& obj,
+      bool oneshot = false, bool autostart = true) const
+  {
+    WallTimerOptions ops(period, boost::bind(callback, obj.get(), _1), 0);
+    ops.tracked_object = obj;
+    ops.oneshot = oneshot;
+    ops.autostart = autostart;
+    return createWallTimer(ops);
+  }
+
+  WallTimer createWallTimer(
+      WallDuration period, const WallTimerCallback& callback, 
+      bool oneshot = false, bool autostart = true) const;
+
+  WallTimer createWallTimer(WallTimerOptions& ops) const;
+
+
+  void setCallbackQueue(CallbackQueueInterface* queue);
 };
 
 class Rate
