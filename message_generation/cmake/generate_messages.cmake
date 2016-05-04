@@ -36,6 +36,7 @@ macro(generate_messages)
   #rosidl_target_interfaces(${PROJECT_NAME}_gencpp    ${typesupport_impl} 
   #get_rmw_typesupport(
   #message("     NOW I HAVE APPENDED SOME STUFF: [ ${catkin_LIBRARIES} ]")
+  list(APPEND ${PROJECT_NAME}_LIBRARIES ${_typesupport_target})
 endmacro()
 include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/rosidl_generator_cpp/${PROJECT_NAME}/msg/shim
