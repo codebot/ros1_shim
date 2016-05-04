@@ -14,7 +14,7 @@ catkin_package(CATKIN_DEPENDS message_runtime std_msgs)
 
 macro(rostutorial T)
   add_executable(${T} ${T}/${T}.cpp)
-  target_link_libraries(${T} ${catkin_LIBRARIES} ${Boost_LIBRARIES} roscpp_tutorials_gencpp__rosidl_typesupport_introspection_cpp)
+  target_link_libraries(${T} ${catkin_LIBRARIES} ${Boost_LIBRARIES}) # roscpp_tutorials_gencpp__rosidl_typesupport_introspection_cpp)
   add_dependencies(${T} roscpp_tutorials_gencpp)
   install(TARGETS ${T}
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
