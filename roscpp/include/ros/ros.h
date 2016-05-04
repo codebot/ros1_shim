@@ -28,6 +28,11 @@ namespace rclcpp
 namespace ros
 {
 
+namespace init_options
+{
+  static const uint32_t NoRosout = 1;
+}
+
 void init(int &argc, char **argv, const std::string &node_name, uint32_t options=0);
 bool ok();
 void spinOnce();
@@ -206,7 +211,7 @@ public:
     rmw_qos_profile_t qos = rmw_qos_profile_default;
     if (queue_size)
       qos.depth = queue_size;
-    auto shfp = [obj, fp] (const std::shared_ptr<M const> msg) { obj->fp(msg); };
+    auto shfp = [obj, fp] (const std::shared_ptr<M const> msg) { (obj->*fp)(msg); };
     ros2_sub = Shim::get_shim()->node->create_subscription<M>(topic, shfp, rmw_qos_profile_default);
     ROS2Subscriber<M> *sub_templated = new ROS2Subscriber<M>(ros2_sub);
     Subscriber ros1_sub;

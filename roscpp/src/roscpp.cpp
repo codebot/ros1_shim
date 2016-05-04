@@ -4,6 +4,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "ros/time.h"
 #include <boost/io/ios_state.hpp>
+#include "ros/file_log.h"
 
 static ros::Shim g_shim;
 
@@ -59,4 +60,10 @@ std::ostream &operator<<(std::ostream &os,
 {
   os << rhs.sec << "." << std::setw(9) << std::setfill('0') << rhs.nanosec;
   return os;
+}
+
+const std::string &ros::file_log::getLogDirectory()
+{
+  static std::string log_directory("/tmp"); // TODO: not this
+  return log_directory;
 }
